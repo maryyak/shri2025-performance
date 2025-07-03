@@ -66,7 +66,7 @@ module.exports = {
                 options: {
                     plugins: [
                         ['mozjpeg',   { progressive: true, quality: 75 }],
-                        ['pngquant',  { speed: 3,       quality: [0.65, 0.8] }],
+                        ['pngquant',  { speed: 3,       quality: [0.9, 0.9] }],
                     ]
                 }
             },
