@@ -1,12 +1,14 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CssMinimizerPlugin   = require('css-minimizer-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
     module: {
         rules: [
@@ -41,17 +43,38 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                type: 'asset',
+                parser: {
+                    dataUrlCondition: { maxSize: 8 * 1024 }
+                },
+                generator: {
+                    filename: 'images/[name].[contenthash:8][ext]'
+                }
             }
         ]
     },
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'styles.min.css'
+        }),
+        new ImageMinimizerPlugin({
+            minimizer: {
+                implementation: ImageMinimizerPlugin.imageminMinify,
+                options: {
+                    plugins: [
+                        ['mozjpeg',   { progressive: true, quality: 75 }],
+                        ['pngquant',  { speed: 3,       quality: [0.65, 0.8] }],
+                    ]
+                }
+            },
         })
     ],
     optimization: {
         minimizer: [
-            new CssMinimizerPlugin(),
+            new CssMinimizerPlugin()
         ]
     },
     resolve: {
