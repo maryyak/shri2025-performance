@@ -57,26 +57,7 @@ module.exports = {
                 type: 'asset/resource',
                 generator: {
                     filename: '../img/[name][ext]?[contenthash]'
-                },
-                use: [
-                    {
-                        loader: 'image-webpack-loader',
-                        options: {
-                            mozjpeg: {
-                                progressive: true,
-                                quality: 90
-                            },
-                            optipng: {
-                                enabled: false
-                            },
-                            pngquant: false,
-                            webp: {
-                                quality: 90,
-                                lossless: true
-                            }
-                        }
-                    }
-                ]
+                }
             }
         ]
     },
@@ -84,12 +65,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
             chunkFilename: '[id].[contenthash].css'
-        }),
-        new CompressionPlugin({
-            algorithm: 'brotliCompress',
-            test: /\.(js|css|html|svg)$/,
-            threshold: 10240,
-            minRatio: 0.8
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
