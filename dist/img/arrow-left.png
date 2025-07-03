@@ -1,9 +1,0 @@
-module.exports = {
-        srcSet: __webpack_public_path__ + "img/arrow-left-18.png"+" 18w",
-        images: [{path: __webpack_public_path__ + "img/arrow-left-18.png",width: 18,height: 28}],
-        src: __webpack_public_path__ + "img/arrow-left-18.png",
-        toString: function(){return __webpack_public_path__ + "img/arrow-left-18.png"},
-        
-        width: 18,
-        height: 28
-      }

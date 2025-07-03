@@ -16762,7 +16762,22 @@ function Header() {
 
 
 function Event(props) {
+  const ref = react.useRef();
+  const {
+    onSize
+  } = props;
+  react.useEffect(() => {
+    const width = ref.current.offsetWidth;
+    const height = ref.current.offsetHeight;
+    if (onSize) {
+      onSize({
+        width,
+        height
+      });
+    }
+  });
   return /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+    ref: ref,
     className: 'event' + (props.slim ? ' event_slim' : ''),
     children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
       className: "event__button",
@@ -16898,18 +16913,8 @@ const TABS_KEYS = Object.keys(TABS);
 function Main() {
   const ref = react.useRef();
   const initedRef = react.useRef(false);
-  const [activeTab, setActiveTab] = react.useState('all');
+  const [activeTab, setActiveTab] = react.useState('');
   const [hasRightScroll, setHasRightScroll] = react.useState(false);
-  const checkScroll = react.useCallback(() => {
-    const panel = ref.current?.querySelector('.section__panel:not(.section__panel_hidden)');
-    setHasRightScroll(panel?.scrollWidth > panel?.clientWidth);
-  }, [activeTab]);
-  react.useEffect(() => {
-    checkScroll();
-    const ro = new ResizeObserver(checkScroll);
-    if (ref.current) ro.observe(ref.current);
-    return () => ro.disconnect();
-  }, [checkScroll]);
   react.useEffect(() => {
     if (!activeTab && !initedRef.current) {
       initedRef.current = true;
@@ -16919,7 +16924,18 @@ function Main() {
   const onSelectInput = event => {
     setActiveTab(event.target.value);
   };
-  const onArrowCLick = react.useCallback(() => {
+  let sizes = [];
+  const onSize = size => {
+    sizes = [...sizes, size];
+  };
+  react.useEffect(() => {
+    const sumWidth = sizes.reduce((acc, item) => acc + item.width, 0);
+    const newHasRightScroll = sumWidth > ref.current.offsetWidth;
+    if (newHasRightScroll !== hasRightScroll) {
+      setHasRightScroll(newHasRightScroll);
+    }
+  });
+  const onArrowCLick = () => {
     const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
     if (scroller) {
       scroller.scrollTo({
@@ -16927,7 +16943,7 @@ function Main() {
         behavior: 'smooth'
       });
     }
-  }, []);
+  };
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
     className: "main",
     children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
@@ -17064,15 +17080,20 @@ function Main() {
       }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "section__panel-wrapper",
         ref: ref,
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-          className: "section__panel",
+        children: [TABS_KEYS.map(key => /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+          role: "tabpanel",
+          className: 'section__panel' + (key === activeTab ? '' : ' section__panel_hidden'),
+          "aria-hidden": key === activeTab ? 'false' : 'true',
+          id: `panel_${key}`,
+          "aria-labelledby": `tab_${key}`,
           children: /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
             className: "section__panel-list",
-            children: TABS[activeTab].items.map((item, index) => /*#__PURE__*/(0,jsx_runtime.jsx)(Event, {
-              ...item
+            children: TABS[key].items.map((item, index) => /*#__PURE__*/(0,jsx_runtime.jsx)(Event, {
+              ...item,
+              onSize: onSize
             }, index))
           })
-        }, activeTab), hasRightScroll && /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        }, key)), hasRightScroll && /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
           className: "section__arrow",
           onClick: onArrowCLick
         })]
