@@ -57,7 +57,41 @@ module.exports = {
                 type: 'asset/resource',
                 generator: {
                     filename: '../img/[name][ext]?[contenthash]'
-                }
+                },
+                use: [
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 95
+                            },
+                            optipng: {
+                                enabled: false
+                            },
+                            pngquant: false,
+                            webp: {
+                                quality: 95,
+                                lossless: true
+                            },
+                            svgo: {
+                                plugins: [
+                                    { name: 'removeViewBox', active: false }, // Не удаляем viewBox
+                                    { name: 'removeDimensions', active: true }, // Удаляем width/height если есть viewBox
+                                    { name: 'cleanupIDs', active: true }, // Удаляем неиспользуемые ID
+                                    { name: 'collapseGroups', active: true }, // Упрощаем группы
+                                    { name: 'removeTitle', active: true }, // Удаляем <title>
+                                    { name: 'removeDesc', active: true }, // Удаляем <desc>
+                                    { name: 'removeUselessDefs', active: true }, // Удаляем неиспользуемые определения
+                                    { name: 'convertPathData', active: true }, // Оптимизируем пути
+                                    { name: 'convertTransform', active: true }, // Оптимизируем трансформации
+                                    { name: 'removeStyleElement', active: true }, // Удаляем стили
+                                    { name: 'removeScriptElement', active: true } // Удаляем скрипты
+                                ]
+                            }
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -65,6 +99,12 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
             chunkFilename: '[id].[contenthash].css'
+        }),
+        new CompressionPlugin({
+            algorithm: 'brotliCompress',
+            test: /\.(js|css|html|svg)$/,
+            threshold: 10240,
+            minRatio: 0.8
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
