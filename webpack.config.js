@@ -65,8 +65,8 @@ module.exports = {
                 implementation: ImageMinimizerPlugin.imageminMinify,
                 options: {
                     plugins: [
-                        ['mozjpeg',   { progressive: true, quality: 75 }],
-                        ['pngquant',  { speed: 3,       quality: [0.9, 0.9] }],
+                        ['mozjpeg',   { progressive: true, quality: 95 }],
+                        ['pngquant',  { speed: 3,       quality: [0.95, 0.95] }],
                     ]
                 }
             },
