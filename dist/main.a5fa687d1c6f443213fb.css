@@ -8,7 +8,7 @@
 
 .event__button:hover, .section__tab:not(.section__tab_active):hover {
     background: #fff;
-    box-shadow: 0 2px 6px 0 rgba(197, 186, 186, .5)
+    box-shadow: 0 2px 6px 0 hsla(0, 9%, 75%, .5)
 }
 
 html {
@@ -28,74 +28,76 @@ body, html {
 }
 
 .a11y-hidden {
-    position: absolute;
-    left: auto;
     height: 1px;
-    width: 1px;
-    top: 0;
+    left: auto;
     overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 1px;
     clip: rect(1px 1px 1px 1px)
 }
 
 .header {
-    position: relative;
-    flex: 0 0 auto;
     align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    flex: 0 0 auto;
     height: 5.75rem;
     margin-bottom: 1.875rem;
     padding: 0 2.5rem;
-    border-bottom: 1px solid #f0f0f0
+    position: relative
 }
 
 .header__logo {
+    background: url(img/logo.svg?fbf3825fdaeb5d79fbbe) 50% 50%/contain no-repeat;
     flex: 0 0 auto;
-    width: 6.75rem;
     height: 2.3125rem;
     margin-right: 3.25rem;
-    background: url(../assets/logo.svg) 50% 50%/contain no-repeat
+    width: 6.75rem
 }
 
 .header__menu {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(img/icon_list_m@1x.svg?93983e09c410833de99e) 50% 50% no-repeat;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
     display: none;
-    width: 3.5rem;
     height: 100%;
     margin: 0 0 0 auto;
     padding: 0;
-    background: url(../assets/icon_list_m@1x.svg) 50% 50% no-repeat;
-    border: none;
-    border-radius: 0;
-    appearance: none;
-    cursor: pointer
+    width: 3.5rem
 }
 
 .header__links {
     display: flex;
     gap: 1.75rem;
+    list-style: none;
     margin: 0;
-    padding: 0;
-    list-style: none
+    padding: 0
 }
 
 @keyframes showMenu {
-    from {
-        transform: translateY(-1rem);
-        opacity: 0
+    0% {
+        opacity: 0;
+        transform: translateY(-1rem)
     }
     to {
-        transform: translateY(0);
-        opacity: 1
+        opacity: 1;
+        transform: translateY(0)
     }
 }
 
 @keyframes hideMenu {
-    from {
-        transform: translateY(0);
+    0% {
         opacity: 1;
+        transform: translateY(0);
         visibility: visible
     }
     to {
-        transform: translateY(-1rem);
         opacity: 0;
+        transform: translateY(-1rem);
         visibility: hidden
     }
 }
@@ -106,16 +108,16 @@ body, html {
 }
 
 .header__link {
+    color: #333;
     font-weight: 700;
     opacity: .6;
-    transition: opacity .15s ease-in-out;
     text-decoration: none;
-    color: #333
+    transition: opacity .15s ease-in-out
 }
 
 .event__button, .section__tab {
-    transition: background-color .25s ease-in-out, box-shadow .25s ease-in-out;
-    cursor: pointer
+    cursor: pointer;
+    transition: background-color .25s ease-in-out, box-shadow .25s ease-in-out
 }
 
 .header__link:hover, .header__link_current {
@@ -125,14 +127,14 @@ body, html {
 .main {
     display: grid;
     flex: 0 0 auto;
-    grid-template-columns:50% 50%;
     gap: 1.625rem;
+    grid-template-columns:50% 50%;
     padding: 0 2.5rem
 }
 
 .main__devices {
-    grid-column-start: 1;
-    grid-column-end: 3
+    grid-column-end: 3;
+    grid-column-start: 1
 }
 
 @media (max-width: 1024px) {
@@ -146,10 +148,10 @@ body, html {
 }
 
 .section__title-header {
-    margin: 0;
+    color: #333;
     font-size: 1.125rem;
     font-weight: 700;
-    color: #333
+    margin: 0
 }
 
 .section__select, .section__tab {
@@ -158,42 +160,44 @@ body, html {
 }
 
 .section__title {
-    display: flex;
     align-items: baseline;
+    display: flex;
     margin: 0 0 1.25rem
 }
 
 .section__select {
-    display: none;
-    margin: 0 0 0 auto;
-    padding: .4375rem 1.9375rem .5rem 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(img/arrow-down.svg?60fc682f8c0f5090796f) calc(100% - 1rem) 50% no-repeat #ffd93e;
     border: none;
     border-radius: 1.25rem;
+    display: none;
     font-family: inherit;
-    background: url(../assets/arrow-down.svg) calc(100% - 1rem) 50% no-repeat #ffd93e;
-    appearance: none
+    margin: 0 0 0 auto;
+    padding: .4375rem 1.9375rem .5rem 1rem
 }
 
 .section__tabs {
+    align-items: baseline;
     display: flex;
     gap: .625rem;
-    align-items: baseline;
+    list-style: none;
     margin: 0 0 0 .8125rem;
-    padding: 0;
-    list-style: none
+    padding: 0
 }
 
 .section__tab {
-    flex: 0 0 auto;
-    padding: .4375rem .9375rem .5rem;
     background: #f7f7f7;
-    border-radius: 1024px
+    border-radius: 1024px;
+    flex: 0 0 auto;
+    padding: .4375rem .9375rem .5rem
 }
 
 .event__button, .hero-dashboard {
-    position: relative;
+    border-radius: 1.25rem;
     display: flex;
-    border-radius: 1.25rem
+    position: relative
 }
 
 .section__tab_active {
@@ -201,26 +205,13 @@ body, html {
 }
 
 .hero-dashboard {
+    background: url(img/bg_2x.png?926d877874d6b6b80450) 50% 50%/1260px no-repeat;
+    background: -webkit-image-set(url(img/bg_2x.png?926d877874d6b6b80450) type("image/webp") 1x, url(img/bg_2x.png?926d877874d6b6b80450) type("image/webp") 2x, url(img/bg_2x.png?926d877874d6b6b80450) type("image/png") 1x, url(img/bg_2x.png?926d877874d6b6b80450) type("image/png") 2x) 50% 50%/1260px no-repeat;
+    background: image-set(url(img/bg_2x.png?926d877874d6b6b80450) type("image/webp") 1x, url(img/bg_2x.png?926d877874d6b6b80450) type("image/webp") 2x, url(img/bg_2x.png?926d877874d6b6b80450) type("image/png") 1x, url(img/bg_2x.png?926d877874d6b6b80450) type("image/png") 2x) 50% 50%/1260px no-repeat;
+    background: -webkit-image-set(url(img/bg_2x.png?926d877874d6b6b80450) 1x, url(img/bg_2x.png?926d877874d6b6b80450) 2x) 50% 50%/1260px no-repeat;
     box-sizing: border-box;
     gap: .9375rem;
-    height: 20.6875rem;
-
-    /* Фолбэк для старых браузеров */
-    background: url(../assets/bg_2x.png) 50% 50%/1260px no-repeat;
-
-    /* Современные браузеры с поддержкой image-set() */
-    background: image-set(
-            url(../assets/bg_2x.png?as=webp) type('image/webp') 1x,
-            url(../assets/bg_2x.png?as=webp&dpr=2) type('image/webp') 2x,
-            url(../assets/bg_2x.png) type('image/png') 1x,
-            url(../assets/bg_2x.png?dpr=2) type('image/png') 2x
-    ) 50% 50%/1260px no-repeat;
-
-    /* Для Safari и браузеров с префиксом */
-    background: -webkit-image-set(
-            url(../assets/bg_2x.png?as=webp) 1x,
-            url(../assets/bg_2x.png?as=webp&dpr=2) 2x
-    ) 50% 50%/1260px no-repeat;
+    height: 20.6875rem
 }
 
 .hero-dashboard__primary {
@@ -229,51 +220,51 @@ body, html {
 }
 
 .hero-dashboard__title {
-    margin: .375rem 0;
+    color: #333;
     font-size: 1.6875rem;
     font-weight: 700;
-    color: #333
+    margin: .375rem 0
 }
 
 .hero-dashboard__subtitle {
-    margin: .375rem 0 0;
+    color: #333;
     font-size: .875rem;
-    color: #333
+    margin: .375rem 0 0
 }
 
 .hero-dashboard__info {
     display: flex;
     gap: 1.125rem;
+    list-style: none;
     margin: 1.5625rem 0 0;
-    padding: 0;
-    list-style: none
+    padding: 0
 }
 
 .hero-dashboard__item-title {
-    font-size: .875rem;
-    color: #858585
+    color: #858585;
+    font-size: .875rem
 }
 
 .hero-dashboard__item-details {
-    display: flex;
     align-items: center;
-    margin-top: .25rem;
+    color: #333;
+    display: flex;
     font-size: 2.25rem;
     font-weight: 700;
-    color: #333
+    margin-top: .25rem
 }
 
 .hero-dashboard__icon {
-    width: 1.625rem;
-    height: 1.625rem;
-    margin-left: .3125rem;
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    background-size: contain
+    background-size: contain;
+    height: 1.625rem;
+    margin-left: .3125rem;
+    width: 1.625rem
 }
 
 .hero-dashboard__icon_rain {
-    background-image: url(../assets/cloud-drizzle.svg)
+    background-image: url(img/cloud-drizzle.svg?42b0eb622364cf87d607)
 }
 
 .hero-dashboard__schedule {
@@ -281,10 +272,10 @@ body, html {
     flex: 0 0 auto;
     flex-direction: column;
     gap: .9375rem;
-    margin: 0;
-    padding: 1.25rem 1.5625rem 1.25rem 0;
-    overflow: auto;
     list-style: none;
+    margin: 0;
+    overflow: auto;
+    padding: 1.25rem 1.5625rem 1.25rem 0;
     scrollbar-width: none
 }
 
@@ -293,18 +284,20 @@ body, html {
 }
 
 .event__button {
-    flex-direction: column;
-    justify-content: end;
-    gap: .1875rem;
-    width: 100%;
-    min-width: 12.5rem;
-    height: 7.5rem;
-    margin: 0;
-    padding: .875rem;
-    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: #f7f7f7;
+    border: none;
+    flex-direction: column;
+    gap: .1875rem;
+    height: 7.5rem;
+    justify-content: end;
+    margin: 0;
+    min-width: 12.5rem;
+    padding: .875rem;
     text-align: left;
-    appearance: none
+    width: 100%
 }
 
 .event-grid, .footer__list, .section__panel-list {
@@ -317,46 +310,46 @@ body, html {
 }
 
 .event__icon {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 1.5rem;
+    left: .875rem;
     position: absolute;
     top: .875rem;
-    left: .875rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: contain
+    width: 1.5rem
 }
 
 .event__icon_temp {
-    background-image: url(../assets/icon_temperature.svg)
+    background-image: url(img/icon_temperature.svg?7dfddd93951249d35902)
 }
 
 .event__icon_temp2 {
-    background-image: url(../assets/icon_temperature_2.svg)
+    background-image: url(img/icon_temperature_2.svg?09fa125b3586a342f8db)
 }
 
 .event__icon_light {
-    background-image: url(../assets/icon_sun.svg)
+    background-image: url(img/icon_sun.svg?4cc3e966fdf03fcc2fe4)
 }
 
 .event__icon_light2 {
-    background-image: url(../assets/icon_sun_2.svg)
+    background-image: url(img/icon_sun_2.svg?5dfee338cdd081d52122)
 }
 
 .event__icon_schedule {
-    background-image: url(../assets/icon_scheduled.svg)
+    background-image: url(img/icon_scheduled.svg?7da758857d472bd9356f)
 }
 
 .event__title {
-    margin: 0;
+    color: #333;
     font-size: .875rem;
     font-weight: 700;
-    color: #333
+    margin: 0
 }
 
 .event__subtitle, .footer__copyright, .footer__link {
-    font-size: .75rem;
-    color: #858585
+    color: #858585;
+    font-size: .75rem
 }
 
 .event-grid {
@@ -367,8 +360,8 @@ body, html {
 }
 
 .section__panel {
-    padding-bottom: .625rem;
     overflow-x: auto;
+    padding-bottom: .625rem;
     scrollbar-width: none
 }
 
@@ -391,14 +384,14 @@ body, html {
 }
 
 .section__arrow {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 18px;
+    background: url(img/arrow-left.png?e11f8b81c69a3f38bbe7) 50% 50% no-repeat;
     bottom: 10px;
-    background: url(./../assets/arrow-left.png) 50% 50% no-repeat;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
     transform: rotate(180deg);
-    cursor: pointer
+    width: 18px
 }
 
 .section__arrow:hover {
@@ -406,24 +399,24 @@ body, html {
 }
 
 .footer {
+    align-items: center;
     display: flex;
     flex: 0 0 auto;
-    align-items: center;
     height: 4rem;
     margin-top: auto;
     padding: 0 2.5rem
 }
 
 .footer__list {
-    display: flex;
     align-items: baseline;
+    display: flex;
     margin: 0;
     padding: 0
 }
 
 .footer__link {
-    transition: opacity .15s ease-in-out;
-    text-decoration: none
+    text-decoration: none;
+    transition: opacity .15s ease-in-out
 }
 
 .footer__link:hover {
@@ -436,10 +429,10 @@ body, html {
 
 @media (max-width: 768px) {
     .header {
+        border-bottom: none;
         height: 4rem;
         margin-bottom: 0;
-        padding: 0 0 0 1.25rem;
-        border-bottom: none
+        padding: 0 0 0 1.25rem
     }
 
     .header__menu, .section__select {
@@ -447,28 +440,28 @@ body, html {
     }
 
     .header__links {
-        display: none;
-        position: absolute;
-        z-index: 1;
-        top: 100%;
-        left: 0;
-        box-sizing: border-box;
-        flex-direction: column;
-        width: 100%;
-        padding: 1.25rem;
         background: #fff;
-        box-shadow: 0 2px 6px 0 rgba(197, 186, 186, .5)
+        box-shadow: 0 2px 6px 0 hsla(0, 9%, 75%, .5);
+        box-sizing: border-box;
+        display: none;
+        flex-direction: column;
+        left: 0;
+        padding: 1.25rem;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        z-index: 1
     }
 
     .header__links-toggled {
-        display: flex;
-        animation: .3s ease-in-out both hideMenu
+        animation: hideMenu .3s ease-in-out both;
+        display: flex
     }
 
     .header__links_opened {
+        animation: showMenu .3s ease-in-out both;
         display: flex;
-        visibility: visible;
-        animation: .3s ease-in-out both showMenu
+        visibility: visible
     }
 
     .main {
@@ -487,7 +480,7 @@ body, html {
         flex-direction: column;
         gap: 1.25rem;
         height: auto;
-        margin-bottom: .3125rem;
+        margin-bottom: .3125rem
     }
 
     .hero-dashboard__primary {
@@ -499,8 +492,8 @@ body, html {
     }
 
     .hero-dashboard__subtitle {
-        margin: .3125rem 0 0;
-        font-size: .75rem
+        font-size: .75rem;
+        margin: .3125rem 0 0
     }
 
     .hero-dashboard__info {
@@ -512,13 +505,13 @@ body, html {
     }
 
     .hero-dashboard__item-details {
-        margin-top: .3125rem;
-        font-size: 1.5rem
+        font-size: 1.5rem;
+        margin-top: .3125rem
     }
 
     .hero-dashboard__icon {
-        width: 1.375rem;
-        height: 1.375rem
+        height: 1.375rem;
+        width: 1.375rem
     }
 
     .hero-dashboard__schedule {
@@ -528,8 +521,8 @@ body, html {
 
     .event-grid {
         display: flex;
-        padding-bottom: .3125rem;
         overflow: auto;
+        padding-bottom: .3125rem;
         scrollbar-width: none
     }
 
@@ -538,17 +531,15 @@ body, html {
     }
 
     .footer {
-        flex-direction: column;
-        align-items: flex-start;
         gap: .9375rem;
         height: auto;
-        padding-top: 1rem;
-        padding-bottom: 1rem
+        padding-bottom: 1rem;
+        padding-top: 1rem
     }
 
-    .footer__list {
-        flex-direction: column;
-        align-items: flex-start
+    .footer, .footer__list {
+        align-items: flex-start;
+        flex-direction: column
     }
 
     .footer__copyright {

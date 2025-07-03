@@ -58,6 +58,37 @@ module.exports = {
                 generator: {
                     filename: '../img/[name][ext]?[contenthash]'
                 }
+            },
+            {
+                test: /\.(png|jpe?g|gif|webp)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: '../img/[name][ext]?[contenthash]'
+                },
+                use: [
+                    {
+                        loader: 'responsive-loader',
+                        options: {
+                            adapter: require('responsive-loader/sharp'),
+                            name: 'img/[name]-[width]w.[ext]?[hash]',
+                            sizes: [1260, 2520], // Основной размер и 2x для Retina
+                            quality: 95,
+                            formats: ['webp', 'png'], // Генерируем WebP и PNG
+                        }
+                    },
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 95
+                            },
+                            webp: {
+                                quality: 95
+                            }
+                        }
+                    }
+                ]
             }
         ]
     },
