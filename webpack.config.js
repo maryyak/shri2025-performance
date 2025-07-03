@@ -57,26 +57,7 @@ module.exports = {
                 type: 'asset/resource',
                 generator: {
                     filename: '../img/[name][ext]?[contenthash]'
-                },
-                use: [
-                    {
-                        loader: 'image-webpack-loader',
-                        options: {
-                            mozjpeg: {
-                                progressive: true,
-                                quality: 95
-                            },
-                            optipng: {
-                                enabled: false
-                            },
-                            pngquant: false,
-                            webp: {
-                                quality: 95,
-                                lossless: true
-                            }
-                        }
-                    }
-                ]
+                }
             }
         ]
     },
