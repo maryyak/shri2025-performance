@@ -1,14 +1,17 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin   = require('css-minimizer-webpack-plugin');
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'main.js',
+        filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true,
+        assetModuleFilename: 'assets/[hash][ext][query]',
+        clean: true
     },
     module: {
         rules: [
@@ -19,17 +22,22 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            ['@babel/preset-react', {
-                                runtime: 'automatic'
-                            }]
-                        ]
+                            ['@babel/preset-react', { runtime: 'automatic' }]
+                        ],
+                        plugins: ['@babel/plugin-syntax-dynamic-import']
                     }
                 }
             },
             {
                 test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../',
+                            esModule: false
+                        }
+                    },
                     'css-loader',
                     {
                         loader: 'postcss-loader',
@@ -45,37 +53,79 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i,
-                type: 'asset',
-                parser: {
-                    dataUrlCondition: { maxSize: 8 * 1024 }
-                },
+                test: /\.(png|jpe?g|gif|svg|webp)$/i,
+                type: 'asset/resource',
                 generator: {
-                    filename: 'images/[name].[contenthash:8][ext]'
-                }
+                    filename: '../img/[name][ext]?[contenthash]'
+                },
+                use: [
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 90
+                            },
+                            optipng: {
+                                enabled: false
+                            },
+                            pngquant: false,
+                            webp: {
+                                quality: 90,
+                                lossless: true
+                            }
+                        }
+                    }
+                ]
             }
         ]
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.min.css'
+            filename: '[name].[contenthash].css',
+            chunkFilename: '[id].[contenthash].css'
         }),
-        new ImageMinimizerPlugin({
-            minimizer: {
-                implementation: ImageMinimizerPlugin.imageminMinify,
-                options: {
-                    plugins: [
-                        ['mozjpeg',   { progressive: true, quality: 95 }],
-                        ['pngquant',  { speed: 3,       quality: [0.95, 0.95] }],
-                    ]
-                }
-            },
+        new CompressionPlugin({
+            algorithm: 'brotliCompress',
+            test: /\.(js|css|html|svg)$/,
+            threshold: 10240,
+            minRatio: 0.8
+        }),
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+            inject: 'head',
+            scriptLoading: 'defer',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: true
+            }
         })
     ],
     optimization: {
         minimizer: [
-            new CssMinimizerPlugin()
-        ]
+            '...',
+            new CssMinimizerPlugin(),
+            new TerserPlugin({
+                parallel: true,
+                terserOptions: {
+                    compress: { drop_console: true },
+                    format: { comments: false }
+                },
+                extractComments: false
+            })
+        ],
+        usedExports: true,
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors'
+                }
+            }
+        },
+        runtimeChunk: 'single'
     },
     resolve: {
         extensions: ['.js', '.jsx']
