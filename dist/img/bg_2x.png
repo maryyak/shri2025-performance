@@ -1,9 +1,9 @@
 module.exports = {
-        srcSet: __webpack_public_path__ + "img/bg_2x-300.png"+" 300w"+","+__webpack_public_path__ + "img/bg_2x-600.png"+" 600w"+","+__webpack_public_path__ + "img/bg_2x-1200.png"+" 1200w",
-        images: [{path: __webpack_public_path__ + "img/bg_2x-300.png",width: 300,height: 158},{path: __webpack_public_path__ + "img/bg_2x-600.png",width: 600,height: 315},{path: __webpack_public_path__ + "img/bg_2x-1200.png",width: 1200,height: 630}],
-        src: __webpack_public_path__ + "img/bg_2x-1200.png",
-        toString: function(){return __webpack_public_path__ + "img/bg_2x-1200.png"},
+        srcSet: __webpack_public_path__ + "img/bg_2x-300.png"+" 300w"+","+__webpack_public_path__ + "img/bg_2x-600.png"+" 600w"+","+__webpack_public_path__ + "img/bg_2x-1200.png"+" 1200w"+","+__webpack_public_path__ + "img/bg_2x-1260.png"+" 1260w",
+        images: [{path: __webpack_public_path__ + "img/bg_2x-300.png",width: 300,height: 158},{path: __webpack_public_path__ + "img/bg_2x-600.png",width: 600,height: 315},{path: __webpack_public_path__ + "img/bg_2x-1200.png",width: 1200,height: 630},{path: __webpack_public_path__ + "img/bg_2x-1260.png",width: 1260,height: 662}],
+        src: __webpack_public_path__ + "img/bg_2x-1260.png",
+        toString: function(){return __webpack_public_path__ + "img/bg_2x-1260.png"},
         
-        width: 1200,
-        height: 630
+        width: 1260,
+        height: 662
       }

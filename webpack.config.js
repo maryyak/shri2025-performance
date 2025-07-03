@@ -11,26 +11,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(jpe?g|png|gif|webp)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'img/[name][ext]?[contenthash]'
-                },
-                use: [
-                    {
-                        loader: 'responsive-loader',
-                        options: {
-                            adapter: require('responsive-loader/sharp'),
-                            sizes: [300, 600, 1200],
-                            formats: ['webp', 'jpeg'],
-                            outputPath: 'img/',
-                            name: '[name]-[width].[ext]',
-                            quality: 80,
-                        }
-                    }
-                ]
-            },
-            {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
